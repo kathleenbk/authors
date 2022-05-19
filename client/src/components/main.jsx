@@ -16,12 +16,16 @@ const Main = (props) => {
 
     const deleteAuthor = (deleteId) => {
         axios.delete('http://localhost:8000/api/authors/' + deleteId)
-        .then((res) => {
-            console.log(res.data);
-            setAuthors(authors.filter( (author) => author._id !== deleteId));
-        })
-        .catch((err) => console.log(err))
+            .then((res) => {
+                console.log(res.data);
+                setAuthors(authors.filter((author) => author._id !== deleteId));
+            })
+            .catch((err) => console.log(err))
     }
+
+
+    
+
 
     return (
         <div className='tablecontainer'>
@@ -33,7 +37,7 @@ const Main = (props) => {
                     <th>Actions available</th>
                 </tr>
                 {
-                    authors.map((author, idx) =>{
+                    authors.sort((a, b) => a.name.localeCompare(b.name)).map((author) => {
                         return (
                             <tr key={author._id}>
                                 <td>{author.name}</td>
